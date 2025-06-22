@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>我的网页收藏夹</title>
+</head>
+<body>
+  <h1>我的网页收藏</h1>
+  <ul id="site-list"></ul>
+  <script>
+    fetch('sites.json')
+      .then(res => res.json())
+      .then(sites => {
+        const list = document.getElementById('site-list');
+        sites.forEach(site => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${site.url}" target="_blank">${site.title}</a> - ${site.desc}`;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
