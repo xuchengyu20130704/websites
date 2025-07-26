@@ -1,23 +1,51 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <title>我的网页收藏夹</title>
+    <meta charset="UTF-8">
+    <title>GitHub Pages 导航</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; }
+        .container { max-width: 600px; margin: 40px auto; padding: 24px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; }
+        h1 { color: #333; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 16px 0; }
+        a { color: #0070f3; text-decoration: none; font-size: 18px; }
+        a:hover { text-decoration: underline; }
+        .error { color: red; }
+    </style>
 </head>
 <body>
-  <h1>我的网页收藏</h1>
-  <ul id="site-list"></ul>
-  <script>
-    fetch('sites.json')
-      .then(res => res.json())
-      .then(sites => {
-        const list = document.getElementById('site-list');
-        sites.forEach(site => {
-          const li = document.createElement('li');
-          li.innerHTML = `<a href="${site.url}" target="_blank">${site.title}</a> - ${site.desc}`;
-          list.appendChild(li);
-        });
-      });
-  </script>
+    <div class="container">
+        <h1>欢迎来到我的 GitHub Pages 导航页</h1>
+        <p>请选择你要访问的页面：</p>
+        <ul id="pages-list">
+            <li>正在加载...</li>
+        </ul>
+        <hr>
+        <small>本页面由 <a href="https://github.com/xuchengyu20130704/websites" target="_blank">GitHub 仓库</a> 自动生成。</small>
+    </div>
+    <script>
+        fetch('githubpages.json')
+            .then(response => {
+                if (!response.ok) throw new Error('无法加载 JSON 文件');
+                return response.json();
+            })
+            .then(data => {
+                const list = document.getElementById('pages-list');
+                list.innerHTML = '';
+                if (data.pages && data.pages.length > 0) {
+                    data.pages.forEach(page => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<a href="${page.url}" target="_blank">${page.name}</a>`;
+                        list.appendChild(li);
+                    });
+                } else {
+                    list.innerHTML = '<li>没有可用的页面链接。</li>';
+                }
+            })
+            .catch(error => {
+                document.getElementById('pages-list').innerHTML = `<li class="error">${error.message}</li>`;
+            });
+    </script>
 </body>
 </html>
