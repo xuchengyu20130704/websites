@@ -1,10 +1,10 @@
 {
   "pages": [
     {
-      "name": "主站：websites",
+      "name": "主站",
       "url": "https://xuchengyu20130704.github.io/websites/"
     }
-    ,{ "name": "个人主页", "url": "https://github.com/xuchengyu20130704" }
+    ,{ "name": "个人主页", "url": "https://bgithub.xyz/xuchengyu20130704" }
     ,{ "name": "心灵树洞(未完成)", "url": "https://xuchengyu20130704.github.io/treehole/" }
     ,{ "name": "教室安静种树", "url": "https://xuchengyu20130704.github.io/quiet-tree/" }
     ,{ "name": "开发板投资记录表", "url": "https://xuchengyu20130704.github.io/elec-money/" }
