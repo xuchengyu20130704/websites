@@ -1,51 +1,117 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>GitHub Pages 导航</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f7f7f7; }
-        .container { max-width: 600px; margin: 40px auto; padding: 24px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; }
-        h1 { color: #333; }
-        ul { list-style: none; padding: 0; }
-        li { margin: 16px 0; }
-        a { color: #0070f3; text-decoration: none; font-size: 18px; }
-        a:hover { text-decoration: underline; }
-        .error { color: red; }
-    </style>
+  <meta charset="UTF-8">
+  <title>我的主页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ...你的样式... -->
+  <style>
+    /* 你的样式可以复制你现有的，不影响功能 */
+    body {
+      background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+      min-height: 100vh;
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      background: rgba(255,255,255,0.9);
+      margin-top: 8vh;
+      padding: 40px 32px 32px 32px;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(49,54,68,0.15);
+      max-width: 420px;
+      width: 90vw;
+      text-align: center;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: none;}
+    }
+    h1 {
+      margin-bottom: 16px;
+      font-size: 2.2em;
+      background: linear-gradient(90deg, #a770ef 30%, #f6d365 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0 0 0;
+    }
+    li {
+      margin: 18px 0;
+    }
+    a {
+      display: inline-block;
+      padding: 13px 38px;
+      border-radius: 25px;
+      background: linear-gradient(90deg,#70e1f5,#ffd194);
+      box-shadow: 0 2px 8px rgba(160,160,160,0.1);
+      color: #222;
+      text-decoration: none;
+      font-size: 1.15em;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+    a:hover {
+      background: linear-gradient(90deg,#fbc2eb,#a6c1ee);
+      color: #1a237e;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 18px rgba(120,120,160,0.11);
+    }
+    @media (max-width: 480px) {
+      .container { padding: 22px 4vw 16px 4vw;}
+      h1 { font-size: 1.35em;}
+      a { padding: 11px 10vw; font-size: 1em;}
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 0.97em;
+      color: #888;
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>欢迎来到我的 GitHub Pages 导航页</h1>
-        <p>请选择你要访问的页面：</p>
-        <ul id="pages-list">
-            <li>正在加载...</li>
-        </ul>
-        <hr>
-        <small>本页面由 <a href="https://github.com/xuchengyu20130704/websites" target="_blank">GitHub 仓库</a> 自动生成。</small>
+  <div class="container">
+    <h1>欢迎来到我的主页</h1>
+    <ul id="pages-list">
+      <li>正在加载...</li>
+    </ul>
+    <div class="footer">
+      © 2025 xuchengyu20130704 &nbsp;|&nbsp; <a href="https://github.com/xuchengyu20130704" target="_blank" style="color:#a770ef;text-decoration:underline;">GitHub</a>
     </div>
-    <script>
-        fetch('githubpages.json')
-            .then(response => {
-                if (!response.ok) throw new Error('无法加载 JSON 文件');
-                return response.json();
-            })
-            .then(data => {
-                const list = document.getElementById('pages-list');
-                list.innerHTML = '';
-                if (data.pages && data.pages.length > 0) {
-                    data.pages.forEach(page => {
-                        const li = document.createElement('li');
-                        li.innerHTML = `<a href="${page.url}" target="_blank">${page.name}</a>`;
-                        list.appendChild(li);
-                    });
-                } else {
-                    list.innerHTML = '<li>没有可用的页面链接。</li>';
-                }
-            })
-            .catch(error => {
-                document.getElementById('pages-list').innerHTML = `<li class="error">${error.message}</li>`;
-            });
-    </script>
+  </div>
+  <script>
+    fetch('githubpages.json')
+      .then(response => {
+        if (!response.ok) throw new Error('无法加载 JSON 文件');
+        return response.json();
+      })
+      .then(data => {
+        const list = document.getElementById('pages-list');
+        list.innerHTML = '';
+        if (data.pages && data.pages.length > 0) {
+          data.pages.forEach(page => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${page.url}" target="_blank" rel="noopener">${page.name}</a>`;
+            list.appendChild(li);
+          });
+        } else {
+          list.innerHTML = '<li>没有可用的页面链接。</li>';
+        }
+      })
+      .catch(error => {
+        document.getElementById('pages-list').innerHTML = `<li class="error">${error.message}</li>`;
+      });
+  </script>
 </body>
 </html>
